@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c263a1a-51b1-473f-b82a-d8f02fe56efb">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     department.`kode` AS department_kode,
+     department.`nama` AS department_nama,
+     department.`keterangan` AS department_keterangan,
+     karyawan.`id` AS karyawan_id,
+     karyawan.`department` AS karyawan_department ,
+     count(karyawan.`id`) as karyawan
+     FROM
+     `karyawan` karyawan INNER JOIN `department` department ON karyawan.`department` = department.`kode`
+group by department.`kode`;]]>
+	</queryString>
+	<field name="department_kode" class="java.lang.String"/>
+	<field name="department_nama" class="java.lang.String"/>
+	<field name="department_keterangan" class="java.lang.String"/>
+	<field name="karyawan_id" class="java.lang.String"/>
+	<field name="karyawan_department" class="java.lang.String"/>
+	<field name="karyawan" class="java.lang.Long"/>
+	<variable name="nourut" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{nourut}]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<variable name="karyawan" class="java.lang.String">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d00374e6-4c97-4eb7-9540-0df8da5f9224" x="98" y="0" width="375" height="33"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="20" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PT. ISM BOGASARI FLOUR MILLS]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="7604b265-83b0-44e8-9dec-ec954390e393" x="0" y="0" width="81" height="79"/>
+				<imageExpression><![CDATA["\\lib\\logo 150px.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="33" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Pabrik Produksi Jakarta  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="33" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[JL. Raya Cilincing, Tanjung Priok, Jakarta 14110]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="45" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Phone 	                    : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="45" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[(6221) 4301048, 43913140, Fax : 4374673, 4353142]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="57" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Kantor Pusat                  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="57" width="282" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Indofood Tower, 27th Floor, JL. Jend Sudirman Kav. 76-78 Jakarta 12910]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="176" y="0" width="205" height="19"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[LAPORAN SELURUH DATA DEPARTMENT]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="fb9b90ec-d1e5-42de-800d-e39019838b10" x="164" y="18" width="230" height="1"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="28" y="0" width="116" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KODE DEPARTMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="0" y="0" width="28" height="31"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="144" y="0" width="125" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAMA DEPARTMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="269" y="1" width="170" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KETERANGAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="439" y="0" width="116" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUMLAH KARYAWAN]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="66" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dff2da5c-56a7-4d92-96b8-3e8642f05bf1" x="0" y="2" width="28" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{nourut}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="9d617d52-90bc-4e4c-b3f6-42642ec46bb6" x="0" y="45" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="66e37b7f-f2c8-4048-a1c2-851dec67e7ca" x="28" y="2" width="116" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{department_kode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1e76e47f-05d9-4057-8960-673c208da686" x="144" y="2" width="125" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{department_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b265e550-5660-4c6e-bcc6-b2e501af1c79" x="269" y="2" width="170" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{department_keterangan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f7266014-4af8-423f-8cb3-d64f4a2053a8" x="439" y="2" width="116" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

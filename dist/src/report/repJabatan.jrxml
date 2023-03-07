@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c263a1a-51b1-473f-b82a-d8f02fe56efb">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     count(karyawan.`id`) AS karyawan,
+     karyawan.`id` AS karyawan_id,
+     jabatan.`kode_jabatan` AS jabatan_kode_jabatan,
+     jabatan.`nama_jabatan` AS jabatan_nama_jabatan,
+     jabatan.`keterangan` AS jabatan_keterangan,
+     jabatan.`upah_lembur` AS jabatan_upah_lembur,
+     jabatan.`upah_dinas` AS jabatan_upah_dinas,
+     karyawan.`jabatan` AS karyawan_jabatan
+FROM
+     `karyawan` karyawan INNER JOIN `jabatan` jabatan ON karyawan.`jabatan` = jabatan.`kode_jabatan`
+GROUP BY
+     jabatan.`kode_jabatan`]]>
+	</queryString>
+	<field name="karyawan" class="java.lang.Long"/>
+	<field name="karyawan_id" class="java.lang.String"/>
+	<field name="jabatan_kode_jabatan" class="java.lang.String"/>
+	<field name="jabatan_nama_jabatan" class="java.lang.String"/>
+	<field name="jabatan_keterangan" class="java.lang.String"/>
+	<field name="jabatan_upah_lembur" class="java.lang.Long"/>
+	<field name="jabatan_upah_dinas" class="java.lang.Long"/>
+	<field name="karyawan_jabatan" class="java.lang.String"/>
+	<variable name="nourut" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{nourut}]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<variable name="karyawan" class="java.lang.String">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d00374e6-4c97-4eb7-9540-0df8da5f9224" x="98" y="0" width="375" height="33"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="20" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PT. ISM BOGASARI FLOUR MILLS]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="7604b265-83b0-44e8-9dec-ec954390e393" x="0" y="0" width="81" height="79"/>
+				<imageExpression><![CDATA["\\lib\\logo 150px.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="33" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Pabrik Produksi Jakarta  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="33" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[JL. Raya Cilincing, Tanjung Priok, Jakarta 14110]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="45" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Phone 	                    : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="45" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[(6221) 4301048, 43913140, Fax : 4374673, 4353142]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="57" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Kantor Pusat                  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="57" width="282" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Indofood Tower, 27th Floor, JL. Jend Sudirman Kav. 76-78 Jakarta 12910]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="176" y="0" width="205" height="19"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[LAPORAN SELURUH DATA JABATAN]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="fb9b90ec-d1e5-42de-800d-e39019838b10" x="164" y="18" width="230" height="1"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="28" y="0" width="70" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KODE JABATAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="0" y="0" width="28" height="31"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="1" width="114" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAMA JABATAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="212" y="1" width="126" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KETERANGAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="462" y="0" width="93" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUMLAH KARYAWAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="338" y="1" width="62" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UPAH LEMBUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="400" y="1" width="62" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UPAH DINAS LUAR]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="66" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dff2da5c-56a7-4d92-96b8-3e8642f05bf1" x="0" y="2" width="28" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{nourut}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="9d617d52-90bc-4e4c-b3f6-42642ec46bb6" x="0" y="45" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="f7266014-4af8-423f-8cb3-d64f4a2053a8" x="462" y="2" width="61" height="43"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{karyawan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7c35cf71-7cd7-40a4-a0d8-e4d55a378cfd" x="28" y="2" width="70" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jabatan_kode_jabatan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4258460f-e414-4e20-a9a0-e6fa7232110b" x="98" y="2" width="114" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jabatan_nama_jabatan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ac2e722a-1cd9-4788-a5ef-e680e593529e" x="212" y="2" width="126" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jabatan_keterangan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2aeb229f-f1f6-4d43-95bf-1b114ed7a410" x="338" y="2" width="62" height="43"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{jabatan_upah_lembur}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="def2808c-a436-48e1-96a9-f332d0cc4c03" x="400" y="2" width="62" height="43"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{jabatan_upah_dinas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

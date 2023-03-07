@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c263a1a-51b1-473f-b82a-d8f02fe56efb">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     department.`kode` AS department_kode,
+     department.`nama` AS department_nama,
+     jabatan.`kode_jabatan` AS jabatan_kode_jabatan,
+     jabatan.`nama_jabatan` AS jabatan_nama_jabatan,
+     karyawan.`id` AS karyawan_id,
+     karyawan.`nik` AS karyawan_nik,
+     karyawan.`nama` AS karyawan_nama,
+     karyawan.`department` AS karyawan_department,
+     karyawan.`alamat` AS karyawan_alamat,
+     karyawan.`agama` AS karyawan_agama,
+     karyawan.`no_telp` AS karyawan_no_telp,
+     karyawan.`jabatan` AS karyawan_jabatan,
+     karyawan.`gaji` AS karyawan_gaji,
+     karyawan.`id_atasan` AS karyawan_id_atasan,
+     cuti_jml.`id_user` AS cuti_jml_id_user,
+     cuti_jml.`cuti_tahunan` AS cuti_jml_cuti_tahunan,
+     cuti_jml.`cuti_sisa` AS cuti_jml_cuti_sisa,
+     karyawan.`password` AS karyawan_password
+FROM
+     `karyawan` karyawan INNER JOIN `cuti_jml` cuti_jml ON karyawan.`id` = cuti_jml.`id_user`
+     INNER JOIN `jabatan` jabatan ON karyawan.`jabatan` = jabatan.`kode_jabatan`
+     INNER JOIN `department` department ON karyawan.`department` = department.`kode`]]>
+	</queryString>
+	<field name="department_kode" class="java.lang.String"/>
+	<field name="department_nama" class="java.lang.String"/>
+	<field name="jabatan_kode_jabatan" class="java.lang.String"/>
+	<field name="jabatan_nama_jabatan" class="java.lang.String"/>
+	<field name="karyawan_id" class="java.lang.String"/>
+	<field name="karyawan_nik" class="java.lang.String"/>
+	<field name="karyawan_nama" class="java.lang.String"/>
+	<field name="karyawan_department" class="java.lang.String"/>
+	<field name="karyawan_alamat" class="java.lang.String"/>
+	<field name="karyawan_agama" class="java.lang.String"/>
+	<field name="karyawan_no_telp" class="java.lang.String"/>
+	<field name="karyawan_jabatan" class="java.lang.String"/>
+	<field name="karyawan_gaji" class="java.lang.Long"/>
+	<field name="karyawan_id_atasan" class="java.lang.String"/>
+	<field name="cuti_jml_id_user" class="java.lang.String"/>
+	<field name="cuti_jml_cuti_tahunan" class="java.lang.Integer"/>
+	<field name="cuti_jml_cuti_sisa" class="java.lang.Integer"/>
+	<field name="karyawan_password" class="java.lang.String"/>
+	<variable name="nourut" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{nourut}]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<variable name="cuti" class="java.lang.String">
+		<variableExpression><![CDATA[($F{cuti_jml_cuti_tahunan}+" / "+$F{cuti_jml_cuti_sisa})]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d00374e6-4c97-4eb7-9540-0df8da5f9224" x="98" y="0" width="375" height="33"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="20" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PT. ISM BOGASARI FLOUR MILLS]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="7604b265-83b0-44e8-9dec-ec954390e393" x="0" y="0" width="81" height="79"/>
+				<imageExpression><![CDATA["\\lib\\logo 150px.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="33" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Pabrik Produksi Jakarta  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="33" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[JL. Raya Cilincing, Tanjung Priok, Jakarta 14110]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="45" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Phone 	                    : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="45" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[(6221) 4301048, 43913140, Fax : 4374673, 4353142]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="57" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Kantor Pusat                  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="57" width="282" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Indofood Tower, 27th Floor, JL. Jend Sudirman Kav. 76-78 Jakarta 12910]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="176" y="0" width="205" height="19"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[LAPORAN SELURUH DATA KARYAWAN]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="fb9b90ec-d1e5-42de-800d-e39019838b10" x="164" y="18" width="230" height="1"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="28" y="0" width="53" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="81" y="0" width="61" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO. GAJI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="142" y="0" width="59" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="201" y="0" width="60" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JABATAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="261" y="0" width="76" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATASAN LANGSUNG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="337" y="0" width="84" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALAMAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="421" y="0" width="48" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO. TELP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="469" y="0" width="45" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGAMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="0" y="0" width="28" height="31"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="514" y="0" width="41" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUTI / SISA CUTI]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="66" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dff2da5c-56a7-4d92-96b8-3e8642f05bf1" x="0" y="2" width="28" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{nourut}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="49b8475c-7bd7-4f79-9512-79383373cc3f" x="28" y="2" width="53" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6e4e11d4-2f72-4873-b6fa-cf4980fd7581" x="142" y="2" width="59" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{department_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b7a565a8-0612-4c92-b2a8-5ddf7de9614c" x="201" y="2" width="60" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jabatan_nama_jabatan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6aa49fcb-cc80-40f0-8448-695a19eba194" x="261" y="2" width="76" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan_id_atasan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="955fc9dd-99ce-4749-8e45-154d375fb063" x="337" y="2" width="84" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan_alamat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b82a90c-7e46-43c7-a572-2bd6a3476bd3" x="421" y="2" width="48" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan_no_telp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9597798f-95eb-4901-a588-9dc3497f5177" x="469" y="2" width="45" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan_agama}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="9d617d52-90bc-4e4c-b3f6-42642ec46bb6" x="0" y="45" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="6fd26d6f-5f3b-4a6b-8626-7166063ca63a" x="514" y="2" width="41" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{cuti}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fe17850e-569c-4749-81cb-c1cc2e805de1" x="81" y="2" width="61" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan_nik}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="26" splitType="Stretch"/>
+	</summary>
+</jasperReport>

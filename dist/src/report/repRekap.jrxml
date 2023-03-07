@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c263a1a-51b1-473f-b82a-d8f02fe56efb">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_dept" class="java.lang.String"/>
+	<parameter name="tahun" class="java.lang.String"/>
+	<parameter name="periode" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     karyawan.`id` AS karyawan_id,
+     karyawan.`password` AS karyawan_password,
+     karyawan.`nik` AS karyawan_nik,
+     karyawan.`nama` AS karyawan_nama,
+     karyawan.`department` AS karyawan_department,
+     karyawan.`alamat` AS karyawan_alamat,
+     karyawan.`agama` AS karyawan_agama,
+     karyawan.`no_telp` AS karyawan_no_telp,
+     karyawan.`jabatan` AS karyawan_jabatan,
+     karyawan.`gaji` AS karyawan_gaji,
+     karyawan.`id_atasan` AS karyawan_id_atasan,
+     logs_transaksi.`id_user` AS logs_transaksi_id_user,
+     logs_transaksi.`id_transaksi` AS logs_transaksi_id_transaksi,
+     logs_transaksi.`jenis` AS logs_transaksi_jenis,
+     logs_transaksi.`tanggal` AS logs_transaksi_tanggal,
+     logs_transaksi.`total` AS logs_transaksi_total,
+     logs_transaksi.`lama` AS logs_transaksi_lama,
+     department.`kode` AS department_kode,
+     department.`nama` AS department_nama,
+     department.`keterangan` AS department_keterangan,
+     jabatan.`kode_jabatan` AS jabatan_kode_jabatan,
+     jabatan.`nama_jabatan` AS jabatan_nama_jabatan,
+     jabatan.`keterangan` AS jabatan_keterangan,
+     jabatan.`upah_lembur` AS jabatan_upah_lembur,
+     jabatan.`upah_dinas` AS jabatan_upah_dinas,
+
+( SELECT SUM(total) FROM `logs_transaksi` WHERE jenis = "Reimbursement" ) as reimburse,
+( SELECT SUM(total) FROM `logs_transaksi` WHERE jenis = "Dinas Luar" ) as dinas,
+( SELECT SUM(total) FROM `logs_transaksi` WHERE jenis = "Lembur" ) as lembur,
+( SELECT gaji_logs.gaji FROM gaji_logs WHERE (id_user = karyawan.id and gaji_logs.date like  '%'||'$P!{periode}'||' %') order by gaji_logs.date desc limit 1) as gaji_terakhir
+
+FROM
+     `karyawan` karyawan INNER JOIN `logs_transaksi` logs_transaksi ON karyawan.`id` = logs_transaksi.`id_user`
+     INNER JOIN `department` department ON karyawan.`department` = department.`kode`
+     INNER JOIN `jabatan` jabatan ON karyawan.`jabatan` = jabatan.`kode_jabatan`
+
+where (department.kode=$P{id_dept} and month(logs_transaksi.tanggal)=$P{periode} and year(logs_transaksi.tanggal)=$P{tahun})
+
+group by karyawan.id;]]>
+	</queryString>
+	<field name="karyawan_id" class="java.lang.String"/>
+	<field name="karyawan_password" class="java.lang.String"/>
+	<field name="karyawan_nik" class="java.lang.String"/>
+	<field name="karyawan_nama" class="java.lang.String"/>
+	<field name="karyawan_department" class="java.lang.String"/>
+	<field name="karyawan_alamat" class="java.lang.String"/>
+	<field name="karyawan_agama" class="java.lang.String"/>
+	<field name="karyawan_no_telp" class="java.lang.String"/>
+	<field name="karyawan_jabatan" class="java.lang.String"/>
+	<field name="karyawan_gaji" class="java.lang.Long"/>
+	<field name="karyawan_id_atasan" class="java.lang.String"/>
+	<field name="logs_transaksi_id_user" class="java.lang.String"/>
+	<field name="logs_transaksi_id_transaksi" class="java.lang.String"/>
+	<field name="logs_transaksi_jenis" class="java.lang.String"/>
+	<field name="logs_transaksi_tanggal" class="java.sql.Date"/>
+	<field name="logs_transaksi_total" class="java.lang.Long"/>
+	<field name="logs_transaksi_lama" class="java.lang.Integer"/>
+	<field name="department_kode" class="java.lang.String"/>
+	<field name="department_nama" class="java.lang.String"/>
+	<field name="department_keterangan" class="java.lang.String"/>
+	<field name="jabatan_kode_jabatan" class="java.lang.String"/>
+	<field name="jabatan_nama_jabatan" class="java.lang.String"/>
+	<field name="jabatan_keterangan" class="java.lang.String"/>
+	<field name="jabatan_upah_lembur" class="java.lang.Long"/>
+	<field name="jabatan_upah_dinas" class="java.lang.Long"/>
+	<field name="reimburse" class="java.math.BigDecimal"/>
+	<field name="dinas" class="java.math.BigDecimal"/>
+	<field name="lembur" class="java.math.BigDecimal"/>
+	<field name="gaji_terakhir" class="java.lang.Long"/>
+	<variable name="nourut" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{nourut}]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<variable name="total" class="java.math.BigDecimal"/>
+	<variable name="karyawan_nik_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{karyawan_nik}]]></variableExpression>
+	</variable>
+	<variable name="thp" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{reimburse}.add($F{dinas}).add($F{lembur}).add($F{gaji_terakhir})]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d00374e6-4c97-4eb7-9540-0df8da5f9224" x="98" y="0" width="375" height="33"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="20" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PT. ISM BOGASARI FLOUR MILLS]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="7604b265-83b0-44e8-9dec-ec954390e393" x="0" y="0" width="81" height="79"/>
+				<imageExpression><![CDATA["\\lib\\logo 150px.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="33" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Pabrik Produksi Jakarta  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="33" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[JL. Raya Cilincing, Tanjung Priok, Jakarta 14110]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="45" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Phone 	                    : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="45" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[(6221) 4301048, 43913140, Fax : 4374673, 4353142]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="57" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Kantor Pusat                  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="57" width="282" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Indofood Tower, 27th Floor, JL. Jend Sudirman Kav. 76-78 Jakarta 12910]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="149" y="0" width="245" height="19"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[LAPORAN REKAP GAJI KARYAWAN PER-DEPARTMENT]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="fb9b90ec-d1e5-42de-800d-e39019838b10" x="149" y="18" width="245" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="0" y="30" width="67" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTMENT : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="30" width="88" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUMLAH KARYAWAN : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6e4e11d4-2f72-4873-b6fa-cf4980fd7581" x="67" y="30" width="106" height="31"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{department_nama}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page">
+				<reportElement uuid="502e0852-19d5-438e-a35f-ea329477cdec" x="279" y="30" width="79" height="31"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{karyawan_nik_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="28" y="0" width="95" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="0" y="0" width="28" height="31"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="123" y="0" width="68" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO GAJI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="0" width="57" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GAJI POKOK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="248" y="0" width="68" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UPAH LEMBUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="316" y="0" width="69" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REIMBURSEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="385" y="0" width="88" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UPAH DINAS LUAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="473" y="0" width="80" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dff2da5c-56a7-4d92-96b8-3e8642f05bf1" x="0" y="2" width="28" height="26"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{nourut}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="49b8475c-7bd7-4f79-9512-79383373cc3f" x="28" y="2" width="95" height="26"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{karyawan_nama}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="9d617d52-90bc-4e4c-b3f6-42642ec46bb6" x="0" y="35" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="fe17850e-569c-4749-81cb-c1cc2e805de1" x="123" y="2" width="68" height="27"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{karyawan_nik}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="feee674d-4eae-4d07-b676-3ab75d2614da" x="248" y="2" width="68" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{lembur}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="01fe90c4-c9a6-4713-80cf-26b5167cb4a2" x="385" y="2" width="88" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dinas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b66bf705-5e49-4670-9810-9032404c8d69" x="316" y="2" width="69" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{reimburse}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d8050163-231b-480e-b5df-d33bc2f81294" x="191" y="2" width="57" height="26"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{gaji_terakhir}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="88b56b41-82d9-40f2-b1e9-a35c01d491a0" x="473" y="2" width="80" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{thp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="142" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="c4a7dbbc-5bfd-4b80-a0c6-bc389d0e6f61" x="422" y="30" width="131" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="94bd452c-6433-4e54-a349-c3cfcab8f1f6" x="379" y="117" width="174" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["( "+$F{karyawan_nama}+" )"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="376" y="30" width="46" height="21"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[JAKARTA,]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

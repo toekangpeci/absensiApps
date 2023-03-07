@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c263a1a-51b1-473f-b82a-d8f02fe56efb">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_karyawan" class="java.lang.String"/>
+	<parameter name="periode" class="java.lang.String"/>
+	<parameter name="tahun" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+     cuti_trans.`id` AS cuti_trans_id,
+     cuti_trans.`id_user` AS cuti_trans_id_user,
+     cuti_trans.`jenis_cuti` AS cuti_trans_jenis_cuti,
+     cuti_trans.`alasan` AS cuti_trans_alasan,
+     cuti_trans.`jumlah_cuti` AS cuti_trans_jumlah_cuti,
+     cuti_trans.`mulai_cuti` AS cuti_trans_mulai_cuti,
+     cuti_trans.`akhir_cuti` AS cuti_trans_akhir_cuti,
+     cuti_trans.`delegasi` AS cuti_trans_delegasi,
+     cuti_trans.`status` AS cuti_trans_status,
+     cuti_trans.`keterangan_status` AS cuti_trans_keterangan_status,
+     karyawan.`id` AS karyawan_id,
+     karyawan.`nik` AS karyawan_nik,
+     karyawan.`nama` AS karyawan_nama,
+     karyawan.`department` AS karyawan_department,
+     karyawan.`jabatan` AS karyawan_jabatan,
+     department.`kode` AS department_kode,
+     department.`nama` AS department_nama,
+     jabatan.`kode_jabatan` AS jabatan_kode_jabatan,
+     jabatan.`nama_jabatan` AS jabatan_nama_jabatan,
+     karyawan.`id_atasan` AS karyawan_id_atasan
+FROM
+     `karyawan` karyawan INNER JOIN `department` department ON karyawan.`department` = department.`kode`
+     INNER JOIN `jabatan` jabatan ON karyawan.`jabatan` = jabatan.`kode_jabatan`
+     INNER JOIN `cuti_trans` cuti_trans ON karyawan.`id` = cuti_trans.`id_user`
+
+WHERE karyawan.id=$P{id_karyawan} and month(cuti_trans.mulai_cuti)=$P{periode} and year(cuti_trans.mulai_cuti)=$P{tahun}]]>
+	</queryString>
+	<field name="cuti_trans_id" class="java.lang.String"/>
+	<field name="cuti_trans_id_user" class="java.lang.String"/>
+	<field name="cuti_trans_jenis_cuti" class="java.lang.String"/>
+	<field name="cuti_trans_alasan" class="java.lang.String"/>
+	<field name="cuti_trans_jumlah_cuti" class="java.lang.Integer"/>
+	<field name="cuti_trans_mulai_cuti" class="java.sql.Date"/>
+	<field name="cuti_trans_akhir_cuti" class="java.sql.Date"/>
+	<field name="cuti_trans_delegasi" class="java.lang.String"/>
+	<field name="cuti_trans_status" class="java.lang.String"/>
+	<field name="cuti_trans_keterangan_status" class="java.lang.String"/>
+	<field name="karyawan_id" class="java.lang.String"/>
+	<field name="karyawan_nik" class="java.lang.String"/>
+	<field name="karyawan_nama" class="java.lang.String"/>
+	<field name="karyawan_department" class="java.lang.String"/>
+	<field name="karyawan_jabatan" class="java.lang.String"/>
+	<field name="department_kode" class="java.lang.String"/>
+	<field name="department_nama" class="java.lang.String"/>
+	<field name="jabatan_kode_jabatan" class="java.lang.String"/>
+	<field name="jabatan_nama_jabatan" class="java.lang.String"/>
+	<field name="karyawan_id_atasan" class="java.lang.String"/>
+	<variable name="nourut" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{nourut}]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<variable name="cuti_trans_id_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{cuti_trans_id}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d00374e6-4c97-4eb7-9540-0df8da5f9224" x="98" y="0" width="375" height="33"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="20" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PT. ISM BOGASARI FLOUR MILLS]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="7604b265-83b0-44e8-9dec-ec954390e393" x="0" y="0" width="81" height="79"/>
+				<imageExpression><![CDATA["\\lib\\logo 150px.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="33" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Pabrik Produksi Jakarta  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="33" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[JL. Raya Cilincing, Tanjung Priok, Jakarta 14110]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="45" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Phone 	                    : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="45" width="190" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[(6221) 4301048, 43913140, Fax : 4374673, 4353142]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="98" y="57" width="93" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Kantor Pusat                  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="191" y="57" width="282" height="12"/>
+				<textElement>
+					<font fontName="Segoe UI" size="8"/>
+				</textElement>
+				<text><![CDATA[Indofood Tower, 27th Floor, JL. Jend Sudirman Kav. 76-78 Jakarta 12910]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="177" y="0" width="180" height="19"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[CETAK TRANSAKSI CUTI KARYAWAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="0" y="19" width="42" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAMA  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="0" y="34" width="42" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO GAJI :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="164" y="19" width="63" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTMENT :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="164" y="34" width="63" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JABATAN  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="345" y="18" width="108" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUMLAH TRANSAKSI CUTI :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="345" y="33" width="108" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATASAN LANGSUNG :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="94bd452c-6433-4e54-a349-c3cfcab8f1f6" x="42" y="19" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9c00f8d4-0e5c-4603-9dad-32a51d737fb7" x="227" y="18" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{department_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="52031579-8b94-4392-9f75-1591deae0e9a" x="227" y="33" width="100" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jabatan_nama_jabatan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="16403211-1d51-49df-acaa-f7c6c2902c0a" x="42" y="34" width="100" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan_nik}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f812ce22-b622-4c5c-b7f2-62f97cff8e55" x="453" y="33" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{karyawan_id_atasan}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page">
+				<reportElement uuid="c547037e-aff1-431a-b745-6b21d6d88f34" x="453" y="18" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{cuti_trans_id_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="28" y="0" width="102" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID TRANSAKSI CUTI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="0" y="0" width="28" height="31"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="130" y="0" width="84" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JENIS CUTI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="214" y="0" width="105" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALASAN CUTI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="319" y="0" width="62" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MULAI CUTI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="444" y="0" width="109" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STATUS PENGAJUAN CUTI]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="9d617d52-90bc-4e4c-b3f6-42642ec46bb6" x="0" y="31" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="381" y="1" width="62" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AKHIR CUTI]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dff2da5c-56a7-4d92-96b8-3e8642f05bf1" x="0" y="0" width="28" height="41"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{nourut}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="9d617d52-90bc-4e4c-b3f6-42642ec46bb6" x="-2" y="41" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="3d87826d-72ae-43bb-8ba7-73119e4f1aa4" x="28" y="0" width="102" height="41"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuti_trans_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5d13ba7c-eaed-4f95-82dc-b172096af414" x="130" y="0" width="84" height="41"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuti_trans_jenis_cuti}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="526caa38-076e-4548-8acb-31d68e73aa56" x="214" y="0" width="105" height="41"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuti_trans_alasan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="3d2e85ae-db1d-478e-abfc-73095f5bfcb4" x="319" y="0" width="64" height="41"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuti_trans_mulai_cuti}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="d46e7f11-23e8-4926-87cc-6e5154cb1962" x="383" y="0" width="64" height="41"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuti_trans_akhir_cuti}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7692a6da-73fa-448f-a7ff-8fb1d8fa464d" x="444" y="0" width="108" height="41"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cuti_trans_status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="122" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="c4a7dbbc-5bfd-4b80-a0c6-bc389d0e6f61" x="424" y="20" width="131" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="64eed643-882b-490b-aacd-97c69898eaee" x="378" y="20" width="46" height="21"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[JAKARTA,]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="94bd452c-6433-4e54-a349-c3cfcab8f1f6" x="381" y="107" width="174" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["(   "+$F{karyawan_nama}+"   )"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
